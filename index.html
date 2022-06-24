@@ -6,21 +6,40 @@
       <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div class="wrapper">gi
-            <h1>Chmod Calculator</h1>
-    
+        <div class="wrapper">
+            <h1>Linux Permissions Calculator</h1>
+            <hr>
     
         </div> 
     
         <footer>
+            <div class="form__title">9-bit Permission to Umask converter</div>
             <form class = "form">
-                <div class= "form__title">Find Umask from permissions</div>
-    
-    
-                <label for="Permissions" class="form__label">9-bit Permission</label><br>
-                <input type="text" id="Permissions" class="form__input" name="Permissions" placeholder="rw-r--r--"><br>
-                
-                <input type="submit" class="form__submit" value="Submit">
+                <div class="field">
+                    <label class="form__label">From</label>
+                    <select id="from">
+                        <option value="Chmod">Chmod</option>
+                        <option value="Umask">Umask</option>
+                        <option value="9-bit">9-bit</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label class="form__label">To</label>
+                    <select id="to">
+                        <option value="Chmod">Chmod</option>
+                        <option value="Umask">Umask</option>
+                        <option value="9-bit">9-bit</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="form__label">Numeric Conversion</label>
+                    <input type="text" id="valInput">
+                </div>
+                <div class="field">
+                    <label class="form__label">Chmod</label>
+                    <textarea id="answer" name="answer" rows="10" cols="50"></textarea>
+                </div>
             </form> 
             
         </footer>
