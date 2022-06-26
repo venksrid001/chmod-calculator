@@ -6,10 +6,14 @@ export class ChangeTitle {
         this.fromText = a;
         this.toText = b;
     }
+    getFromText(): string {
+        return this.fromText;
+    }
 
     newString(): string {
         return this.fromText + " to " + this.toText + " converter";
     }
+
 
 
 
