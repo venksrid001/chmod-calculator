@@ -33,14 +33,23 @@
                     </select>
                 </div>
                 <div class="field">
+                    <label class="form__label">File Type</label>
+                    <select id="file_type">
+                        <option value="File">File</option>
+                        <option value="Directory">Directory</option>
+                    </select>
+                </div>
+                <div class="field">
                     <label class="form__label">Numeric Conversion</label>
                     <input type="text" id="valInput">
                 </div>
                 
-            </form> 
+            </form>
             
+            <button class="form__submit">Convert</button>
+             
         </footer>
-    
+        
         <script type="module" src='chmod-calculator.js'></script>
     </body>
     </html>

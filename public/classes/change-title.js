@@ -6,6 +6,9 @@ export class ChangeTitle {
     getFromText() {
         return this.fromText;
     }
+    getToText() {
+        return this.toText;
+    }
     newString() {
         return this.fromText + " to " + this.toText + " converter";
     }

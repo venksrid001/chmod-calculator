@@ -46,7 +46,7 @@ footer {
 }
 
 .form__input, select {
-    display: inline-block;
+    display: block;
     padding: 10px 20px;
     border: 1px solid #e1e1e1;
     border-radius: 8px;
@@ -54,13 +54,16 @@ footer {
 }
 
 .form__submit {
-    display: inline-block;
+    margin: 0 220px;
     padding: 10px;
+    background: #616CD3;
+    color: white;
+    border:none;
+    border-radius: 8px;
 }
 
 .field {
-   
     display: inline-block;
     margin: 0 20px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
