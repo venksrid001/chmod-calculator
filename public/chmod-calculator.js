@@ -20,6 +20,20 @@ const TextFunction = () => {
 const PrintInfoToConsole = (fromValue, toValue, fileType, stringVal) => {
     console.log("From: " + fromValue + '\n', "To: " + toValue + '\n', "File Type: " + fileType + '\n', "String value: " + stringVal + '\n');
 };
+const gatherCombinations = (a) => {
+    const result = [];
+    [...a].forEach((char) => {
+        const temp = [char];
+        result.forEach((x) => {
+            temp.push("" + x + char);
+        });
+        temp.forEach((xChar) => {
+            result.push(xChar);
+        });
+    });
+    return result;
+};
+console.log(gatherCombinations("rwx"));
 fromSelect.onchange = () => TextFunction();
 toSelect.onchange = () => TextFunction();
 submit.addEventListener("click", () => PrintInfoToConsole(fromSelect.value, toSelect.value, fileSelect.value, inputElement.value));

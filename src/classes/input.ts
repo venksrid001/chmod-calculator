@@ -20,6 +20,20 @@ export class Input {
         
     }
 
+    getFromValue(): string {
+        return this.fromValue;
+    }
+
+    getSelection(): Selection {
+        return this.selection;
+    }
+
+    getToValue(): string {
+        return this.toValue;
+    }
+
+    
+
     checkValidInput(): boolean {
         switch(this.selection) {
             case Selection.Ninebit:
@@ -33,7 +47,7 @@ export class Input {
                 return umask_exp.test(this.inputVal)
             
             default:
-                throw console.error("Incorrect Inputs")
+                return false;
         }
     }
 
