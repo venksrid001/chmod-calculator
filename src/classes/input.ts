@@ -32,7 +32,13 @@ export class Input {
         return this.toValue;
     }
 
+    getFileType(): string {
+        return this.fileType;
+    }
     
+    getInputVal(): string {
+        return this.inputVal;
+    }
 
     checkValidInput(): boolean {
         switch(this.selection) {

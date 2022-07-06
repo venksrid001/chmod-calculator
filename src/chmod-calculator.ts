@@ -1,4 +1,6 @@
+import { Calculator } from "./classes/calculate.js";
 import { ChangeTitle } from "./classes/change-title.js";
+import { Input } from "./classes/input.js";
 
 const formTitle = document.getElementById('form__title')!;
 const inputElement = document.querySelector('input')!;
@@ -24,15 +26,12 @@ const TextFunction = () => {
     labelText.textContent = newTitle.getFromText();
 }
 
-const PrintInfoToConsole = (fromValue: string, toValue: string, fileType: string, stringVal: string) => {
-    console.log(
-        "From: " + fromValue+'\n', 
-        "To: "+ toValue+ '\n',
-        "File Type: " +fileType+'\n', 
-        "String value: " + stringVal+ '\n'
-    )
+const CalculateVals = (fromValue: string, toValue: string, fileType: string, stringVal: string) => {
+    const inputval = new Input(fromValue, toValue, fileType, stringVal);
+    const calculator = new Calculator(inputval);
+    console.log(calculator.calculate())
 }
 
 fromSelect!.onchange =() => TextFunction()
 toSelect!.onchange =() => TextFunction()
-submit!.addEventListener("click", () => PrintInfoToConsole(fromSelect!.value, toSelect!.value, fileSelect!.value, inputElement.value))
+submit!.addEventListener("click", () => CalculateVals(fromSelect!.value, toSelect!.value, fileSelect!.value, inputElement.value))

@@ -1,4 +1,6 @@
+import { Calculator } from "./classes/calculate.js";
 import { ChangeTitle } from "./classes/change-title.js";
+import { Input } from "./classes/input.js";
 const formTitle = document.getElementById('form__title');
 const inputElement = document.querySelector('input');
 const inputTitle = document.getElementsByClassName("form__label");
@@ -17,23 +19,11 @@ const TextFunction = () => {
     formTitle.textContent = newTitle.newString();
     labelText.textContent = newTitle.getFromText();
 };
-const PrintInfoToConsole = (fromValue, toValue, fileType, stringVal) => {
-    console.log("From: " + fromValue + '\n', "To: " + toValue + '\n', "File Type: " + fileType + '\n', "String value: " + stringVal + '\n');
+const CalculateVals = (fromValue, toValue, fileType, stringVal) => {
+    const inputval = new Input(fromValue, toValue, fileType, stringVal);
+    const calculator = new Calculator(inputval);
+    console.log(calculator.calculate());
 };
-const gatherCombinations = (a) => {
-    const result = [];
-    [...a].forEach((char) => {
-        const temp = [char];
-        result.forEach((x) => {
-            temp.push("" + x + char);
-        });
-        temp.forEach((xChar) => {
-            result.push(xChar);
-        });
-    });
-    return result;
-};
-console.log(gatherCombinations("rwx"));
 fromSelect.onchange = () => TextFunction();
 toSelect.onchange = () => TextFunction();
-submit.addEventListener("click", () => PrintInfoToConsole(fromSelect.value, toSelect.value, fileSelect.value, inputElement.value));
+submit.addEventListener("click", () => CalculateVals(fromSelect.value, toSelect.value, fileSelect.value, inputElement.value));

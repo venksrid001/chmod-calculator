@@ -21,6 +21,12 @@ export class Input {
     getToValue() {
         return this.toValue;
     }
+    getFileType() {
+        return this.fileType;
+    }
+    getInputVal() {
+        return this.inputVal;
+    }
     checkValidInput() {
         switch (this.selection) {
             case Selection.Ninebit:
