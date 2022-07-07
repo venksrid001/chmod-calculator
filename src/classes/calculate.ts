@@ -82,17 +82,28 @@ export class Calculator {
     }
 
     calculateFromNineBit(toValue: string, file_type: string): string {
+        const permsMap:Map<string, number> = this.gatherRelevantVal();
         switch(toValue) {
             case "Umask":
-                const umaskVal:number = 0;
-                const inputArr = [...this.inputInstance.getInputVal()];
+                var umaskVal:string = "";
+                const inputArr:string[] = this.inputInstance.getInputVal().match(/.{1,3}/g) || []
+                 
                 inputArr.forEach((ia) => {
-                    
+                    ia = ia.replaceAll("-", "");
+                    if (file_type == "File") {
+                       var tempVal:number = 6 - permsMap.get(ia)!
+                       if (tempVal == -1) {tempVal = 0}
+                       umaskVal += tempVal;
+                       
+                    } else {
+                        umaskVal += 7 - permsMap.get(ia)!
+                    }
                 })
-            case "Chmod":
-                var chmodStr:string = ""
-                const permsMap:Map<string, number> = this.gatherRelevantVal();
+                return umaskVal;
                 
+            case "Chmod":
+                
+                var chmodStr:string = ""
                 const inputVal:string[] = this.inputInstance.getInputVal().match(/.{1,3}/g) || []
 
                 inputVal.forEach((xVal) => {
@@ -100,6 +111,7 @@ export class Calculator {
                     chmodStr += permsMap.get(xVal);
                 })
                 return chmodStr;
+
         }
         return "";
     }

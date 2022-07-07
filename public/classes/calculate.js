@@ -61,16 +61,27 @@ export class Calculator {
         return 0;
     }
     calculateFromNineBit(toValue, file_type) {
+        const permsMap = this.gatherRelevantVal();
         switch (toValue) {
             case "Umask":
-                const umaskVal = 0;
-                const inputArr = [...this.inputInstance.getInputVal()];
+                var umaskVal = "";
+                const inputArr = this.inputInstance.getInputVal().match(/.{1,3}/g) || [];
                 inputArr.forEach((ia) => {
+                    ia = ia.replaceAll("-", "");
+                    if (file_type == "File") {
+                        var tempVal = 6 - permsMap.get(ia);
+                        if (tempVal == -1) {
+                            tempVal = 0;
+                        }
+                        umaskVal += tempVal;
+                    }
+                    else {
+                        umaskVal += 7 - permsMap.get(ia);
+                    }
                 });
+                return umaskVal;
             case "Chmod":
                 var chmodStr = "";
-                const permsMap = this.gatherRelevantVal();
-                console.log(permsMap);
                 const inputVal = this.inputInstance.getInputVal().match(/.{1,3}/g) || [];
                 inputVal.forEach((xVal) => {
                     xVal = xVal.replaceAll("-", "");
