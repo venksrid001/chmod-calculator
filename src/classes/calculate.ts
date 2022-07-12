@@ -45,8 +45,15 @@ export class Calculator {
         
     }
 
-
-   
+    getMapKey(permsMap:Map<string,number>, searchVal: Number): string {
+        
+        for (let [key, val] of permsMap.entries()) {
+            if (val == searchVal) {
+                return key
+            }
+        }
+        throw console.error("Value does not exist in permissions map");
+    }
 
     calculate():string | number {
         
@@ -55,6 +62,7 @@ export class Calculator {
         switch (this.inputInstance.getFromValue()) {
             case "Chmod":
               const convertedChmodVal:string | number = this.calculateFromChmod(this.inputInstance.getToValue(), this.inputInstance.getFileType())
+              return convertedChmodVal;
             case "Umask":
                 const convertedUmaskVal: string | number = this.calculateFromUmask(this.inputInstance.getToValue(), this.inputInstance.getFileType())
             case "9-bit":
@@ -67,10 +75,16 @@ export class Calculator {
     }
 
     calculateFromChmod(toValue: string, fileType: string): string | number {
+        const permsMap:Map<string, number> = this.gatherRelevantVal();
         switch(toValue) {
             case "9-bit":
+                var chmodVal: string = ""
                 const inputArr = [...this.inputInstance.getInputVal()];
-                inputArr.forEach
+                inputArr.forEach((iv) => {
+                    const num: number = parseInt(iv);
+                    chmodVal += this.getMapKey(permsMap, num);
+                })
+                return chmodVal;
             case "Umask":
 
         }

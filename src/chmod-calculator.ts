@@ -19,7 +19,6 @@ let labelText: Element;
 })
 
 
-
 const TextFunction = () => {
     const newTitle = new ChangeTitle(fromSelect!.value, toSelect!.value);
     formTitle.textContent = newTitle.newString();

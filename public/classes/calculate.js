@@ -33,6 +33,14 @@ export class Calculator {
         });
         return nineBitMap;
     }
+    getMapKey(permsMap, searchVal) {
+        for (let [key, val] of permsMap.entries()) {
+            if (val == searchVal) {
+                return key;
+            }
+        }
+        throw console.error("Value does not exist in permissions map");
+    }
     calculate() {
         if (!this.inputInstance.checkValidInput()) {
             throw console.error("Inputs are invalid");
@@ -40,6 +48,7 @@ export class Calculator {
         switch (this.inputInstance.getFromValue()) {
             case "Chmod":
                 const convertedChmodVal = this.calculateFromChmod(this.inputInstance.getToValue(), this.inputInstance.getFileType());
+                return convertedChmodVal;
             case "Umask":
                 const convertedUmaskVal = this.calculateFromUmask(this.inputInstance.getToValue(), this.inputInstance.getFileType());
             case "9-bit":
@@ -49,10 +58,16 @@ export class Calculator {
         return "";
     }
     calculateFromChmod(toValue, fileType) {
+        const permsMap = this.gatherRelevantVal();
         switch (toValue) {
             case "9-bit":
+                var chmodVal = "";
                 const inputArr = [...this.inputInstance.getInputVal()];
-                inputArr.forEach;
+                inputArr.forEach((iv) => {
+                    const num = parseInt(iv);
+                    chmodVal += this.getMapKey(permsMap, num);
+                });
+                return chmodVal;
             case "Umask":
         }
         return 0;
