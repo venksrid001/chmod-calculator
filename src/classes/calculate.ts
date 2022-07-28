@@ -49,7 +49,22 @@ export class Calculator {
         
         for (let [key, val] of permsMap.entries()) {
             if (val == searchVal) {
-                return key
+                let newString: string = ""
+
+                if (key.length === 1) {
+                    
+                    if (key == "r") {newString = key + "--"}
+                    if (key == "w") {newString = "-" + key + "-"}
+                    if (key == "x") {newString = "--" + key}
+                }
+                else if (key.length < 3) {
+                    if (!key.includes("r")) {newString = "-" + key.substring(0, key.length)}
+                    if (!key.includes("w")) {newString = key.substring(0,1) + "-" + key.substring(1, key.length)}
+                    if (!key.includes("x")) {newString = key.substring(0, key.length) + "-"}
+                } else {
+                    return key
+                }
+                return newString;
             }
         }
         throw console.error("Value does not exist in permissions map");
@@ -86,7 +101,7 @@ export class Calculator {
                 })
                 return chmodVal;
             case "Umask":
-
+                
         }
         return 0;
     }
