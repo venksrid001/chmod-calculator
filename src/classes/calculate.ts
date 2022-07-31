@@ -80,6 +80,7 @@ export class Calculator {
               return convertedChmodVal;
             case "Umask":
                 const convertedUmaskVal: string | number = this.calculateFromUmask(this.inputInstance.getToValue(), this.inputInstance.getFileType())
+                return convertedUmaskVal;
             case "9-bit":
                 const convertedNinebitVal: string = this.calculateFromNineBit(this.inputInstance.getToValue(), this.inputInstance.getFileType())
                 return convertedNinebitVal;
@@ -101,13 +102,43 @@ export class Calculator {
                 })
                 return chmodVal;
             case "Umask":
-                
+                const fileMax = fileType == "File" ? 6 : 7
+                var umaskVal: string = ""
+                const chmodArr = [...this.inputInstance.getInputVal()]
+                chmodArr.forEach((cm) => {
+                    const number = parseInt(cm)
+                    umaskVal += fileMax - number
+                })
+                return umaskVal;
         }
         return 0;
     }
 
     calculateFromUmask(toValue: string, file_type: string): string | number {
-        return 0;
+        const permsMap:Map<string, number> = this.gatherRelevantVal();
+        let fileVal = file_type == "File" ? 6 : 7
+            switch(toValue) {
+                case "9-bit":
+                    let ninebitVal = ""
+                    const inputArr = [...this.inputInstance.getInputVal()]
+                    inputArr.forEach((iv) => {
+                        const umasknum: number = fileVal - parseInt(iv)
+                        const val = this.getMapKey(permsMap, umasknum)
+                        ninebitVal += val
+                    })
+                    return ninebitVal;
+                case "Chmod":
+                    let chmodVal = ""
+                    const umaskArr = [...this.inputInstance.getInputVal()]
+                    umaskArr.forEach((um) => {
+                        const num = parseInt(um)
+                        chmodVal += fileVal - num
+                    })
+                    return chmodVal;
+                    
+            }
+
+        return 0
     }
 
     calculateFromNineBit(toValue: string, file_type: string): string {
