@@ -9,6 +9,7 @@ const fromSelect = document.getElementById("from") as HTMLSelectElement
 const toSelect = document.getElementById("to") as HTMLSelectElement
 const fileSelect = document.getElementById("file_type") as HTMLSelectElement;
 const submit = document.querySelector(".form__submit") as HTMLElement;
+const footer = document.querySelector("footer");
 
 let labelText: Element; 
 
@@ -26,9 +27,18 @@ const TextFunction = () => {
 }
 
 const CalculateVals = (fromValue: string, toValue: string, fileType: string, stringVal: string) => {
-    const inputval = new Input(fromValue, toValue, fileType, stringVal);
-    const calculator = new Calculator(inputval);
-    console.log(calculator.calculate())
+    
+    try {
+        const inputval = new Input(fromValue, toValue, fileType, stringVal);
+        const calculator = new Calculator(inputval);
+        console.log(calculator.calculate())
+        footer!.innerHTML = `<div id="result_title"> The value is ${calculator.calculate()} </div>`
+        
+    } catch (error) {
+        inputElement.style.border = '1px solid #FF6666'
+        
+    } 
+    
 }
 
 fromSelect!.onchange =() => TextFunction()

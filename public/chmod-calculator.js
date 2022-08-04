@@ -8,6 +8,7 @@ const fromSelect = document.getElementById("from");
 const toSelect = document.getElementById("to");
 const fileSelect = document.getElementById("file_type");
 const submit = document.querySelector(".form__submit");
+const footer = document.querySelector("footer");
 let labelText;
 [...inputTitle].filter((it) => {
     if (it.textContent == "Numeric Conversion") {
@@ -20,9 +21,15 @@ const TextFunction = () => {
     labelText.textContent = newTitle.getFromText();
 };
 const CalculateVals = (fromValue, toValue, fileType, stringVal) => {
-    const inputval = new Input(fromValue, toValue, fileType, stringVal);
-    const calculator = new Calculator(inputval);
-    console.log(calculator.calculate());
+    try {
+        const inputval = new Input(fromValue, toValue, fileType, stringVal);
+        const calculator = new Calculator(inputval);
+        console.log(calculator.calculate());
+        footer.innerHTML = `<div id="result_title"> The value is ${calculator.calculate()} </div>`;
+    }
+    catch (error) {
+        inputElement.style.border = '1px solid #FF6666';
+    }
 };
 fromSelect.onchange = () => TextFunction();
 toSelect.onchange = () => TextFunction();

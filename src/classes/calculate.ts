@@ -16,7 +16,6 @@ export class Calculator {
                 temp.push("" + x + char)
             })
             temp.forEach((xChar) => {
-                
                 result.push(xChar)
                 
             })
@@ -36,7 +35,7 @@ export class Calculator {
             nineBitMap.set(combVal,num)
             
         })
-
+        nineBitMap.set("---", 0)
         return nineBitMap;
                     
                         

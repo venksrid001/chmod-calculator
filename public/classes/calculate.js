@@ -31,6 +31,7 @@ export class Calculator {
             }
             nineBitMap.set(combVal, num);
         });
+        nineBitMap.set("---", 0);
         return nineBitMap;
     }
     getMapKey(permsMap, searchVal) {
