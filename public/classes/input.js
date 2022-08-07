@@ -33,10 +33,10 @@ export class Input {
                 const ninebit_exp = /[-rwx]{9}/;
                 return ninebit_exp.test(this.inputVal);
             case Selection.Chmod:
-                const chmod_exp = /[0-7]{3}/;
+                const chmod_exp = this.getFileType() == "File" ? /[0-6]{3}/ : /[0-7]{3}/;
                 return chmod_exp.test(this.inputVal);
             case Selection.Umask:
-                const umask_exp = /[0-7]{3}/;
+                const umask_exp = this.getFileType() == "File" ? /[0-6]{3}/ : /[0-7]{3}/;
                 return umask_exp.test(this.inputVal);
             default:
                 return false;

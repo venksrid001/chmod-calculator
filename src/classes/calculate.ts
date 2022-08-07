@@ -106,6 +106,7 @@ export class Calculator {
                 const chmodArr = [...this.inputInstance.getInputVal()]
                 chmodArr.forEach((cm) => {
                     const number = parseInt(cm)
+                    
                     umaskVal += fileMax - number
                 })
                 return umaskVal;
